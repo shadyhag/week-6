@@ -58,13 +58,13 @@ We will write everything we want to happen on each feature inside of the
 following block of code:
 
 var eachFeature = function(feature, layer) {
-  ...
+...
 });
 
 Notice that inside of that block of code we have a second block of code:
 
 layer.on('click', function (e) {
-  ...
+...
 })
 
 That part sets up a click event on each feature. Any code inside that second
@@ -100,24 +100,68 @@ the week was the most common for garbage removal?
 
 var dataset = 'https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson';
 
+
 var myStyle = function(feature) {
-  return {};
+  switch(feature.properties.COLLDAY) {
+    case "MON":
+    color = "red";
+    break;
+    case "TUE":
+    color = "yellow";
+    break;
+    case "WED":
+    color = "orange";
+    break;
+    case "THU":
+    color = "green";
+    break;
+    case "FRI":
+    color = "blue";
+    break;
+    default:
+    color = "gray";
+    break;
+  }
+  return {fillColor: color};
 };
 
 var eachFeature = function(feature, layer) {
   layer.on('click', function (e) {
+    switch(feature.properties.COLLDAY) {
+      case "MON":
+      $('span.day-of-week').text('MONDAY');
+      break;
+      case "TUE":
+      $('span.day-of-week').text('TUESDAY');
+      break;
+      case "WED":
+      $('span.day-of-week').text('WEDNESDAY');
+      break;
+      case "THU":
+      $('span.day-of-week').text('THURSDAY');
+      break;
+      case "FRI":
+      $('span.day-of-week').text('FRIDAY');
+      break;
+      default:
+      $('span.day-of-week').text('WEEKDAY');
+      break;
+    }
+
     /* =====================
     The following code will run every time a feature on the map is clicked.
     Check out feature.properties to see some useful data about the feature that
     you can use in your application.
     ===================== */
-    console.log(feature);
     showResults();
+    map.fitBounds(this.getBounds());
+
   });
 };
 
 var myFilter = function(feature) {
-  return true;
+
+  return true&&(feature.properties.COLLDAY!==" ");
 };
 
 $(document).ready(function() {
@@ -142,6 +186,11 @@ var showResults = function() {
   $('#results').show();
 };
 
+var closeResults = function(){
+  $('#results').hide();
+  $('#intro').show();
+  map.setView([40.000, -75.1090],11);
+};
 /* =====================
 Leaflet Configuration
 ===================== */

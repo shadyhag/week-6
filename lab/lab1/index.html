@@ -10,6 +10,7 @@
   <body>
     <!-- Sidebar -->
     <div class="sidebar">
+      <button onclick="closeResults()" style="float:right">Close</button> 
       <div id="intro">
         <h1>Garbage Collection Map</h1>
         <p class="main">The city of Philadelphia collects garbage from
@@ -27,11 +28,35 @@
         Day of Week</span>. If this week is a federal holiday, leave your
         garbage outside on the following day.</p>
       </div>
+      <div class="legend">
+        <table style="width:100%">
+        <tr>
+          <td>MONDAY</td>
+          <td><input style = "background-color: red; opacity:0.2; margin-left:10px" size ="2" type="textbox" disabled></td>
+        </tr>
+        <tr>
+          <td>TUESDAY</td>
+          <td><input style = "background-color: yellow; opacity:0.2; margin-left:10px" size ="2" type="textbox" disabled></td>
+        </tr>
+        <tr>
+          <td>WEDNESDAY</td>
+          <td><input style = "background-color: orange; opacity:0.2; margin-left:10px" size ="2" type="textbox" disabled></td>
+        </tr>
+        <tr>
+          <td>THURSDAY</td>
+          <td><input style = "background-color: green; opacity:0.2; margin-left:10px" size ="2" type="textbox" disabled></td>
+        </tr>
+        <tr>
+          <td>FRIDAY</td>
+          <td><input style = "background-color: blue; opacity:0.2; margin-left:10px" size ="2" type="textbox" disabled></td>
+        </tr>
+      </table>
+      </div>
     </div>
     <!-- Map -->
     <div id="map" class="map"></div>
     <!-- Legend -->
-    <div class="legend"></div>
+
     <!-- Javascript Imports -->
     <script src="js/jquery-2.2.0.js"></script>
     <script src="js/underscore.js"></script>
